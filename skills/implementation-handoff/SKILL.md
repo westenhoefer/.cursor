@@ -1,6 +1,6 @@
 ---
 name: implementation-handoff
-description: Use in Cursor after spec verification passes, when the user explicitly requests a reviewed PR with Cursor reviewer subagents and Bugbot.
+description: Use in Cursor after the spec's Done-when checks pass, when the user explicitly requests a reviewed PR with Cursor reviewer subagents and Bugbot.
 ---
 
 # Implementation Handoff
@@ -14,11 +14,11 @@ This skill is Cursor-specific and requires its Task tool and configured reviewer
 Stop and report if any fails. Do not improvise around them.
 
 - The user authorized committing, pushing, creating a PR, and triggering external review. An implementation request alone is not that authorization.
-- The spec's delivery/handoff section names the agreed base branch. If it does not, ask.
+- The request names the base branch, or the user agreed one. If not, ask.
 - The current branch is a feature branch created from the base branch, not the base itself.
 - Every change to be committed belongs to this spec. Inspect staged and unstaged changes; unrelated edits mean the user must decide what to include. The working tree must be clean after the implementation commit and before reviewer dispatch.
 - `origin` exists and `gh auth status` succeeds.
-- Spec verification commands have been run and pass.
+- The spec's Done-when commands have been run and pass.
 
 ## Procedure
 
@@ -63,7 +63,7 @@ dispatch applicable reviewers in parallel
 loop:
   if no blocking findings: break
   if round == 2: stop; report remaining blocking findings to the user; do not push or open a PR
-  fix blocking findings (advisory optional); re-run spec verification; commit
+  fix blocking findings (advisory optional); re-run Done-when commands; commit
   round = 2
   re-dispatch only reviewers whose blocking findings were touched, passing their previous findings
 ```
