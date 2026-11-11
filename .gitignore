@@ -48,12 +48,14 @@ projects/*/*
 # Keep this outside Cursor's managed block.
 /*
 !/.gitignore
+!/AGENTS.md
 !/README.md
+!/agents/
+!/agents/**
 !/skills/
 !/commands/
 !/rules/
 
-# Do not track the agents junction: its source is versioned in ~/.agents.
 # mcp.json may contain credentials; add a sanitized example explicitly instead.
 **/node_modules/
 **/.env
